@@ -1,10 +1,9 @@
 import React from 'react';
-import Main from './Components/Main';
-import './Components/style.css'
+import MesPokemons from './Components/MesPokemons';
 function App() {
   return (
     <>
-      <Main/>
+      <MesPokemons/>
     </>
   );
 }
