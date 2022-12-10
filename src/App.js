@@ -5,16 +5,18 @@ import MonPokedex from './Components/MonPokedex';
 import Navigation from './Components/Navigation';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+// Définition de l'objet App.
+// Celui-ci gère la génération du rendu de notre app.
 function App() {
-
-  return (
-    <>
-    <Navigation />
-    <Routes>
-      <Route path='/' element={<MesPokemons/>}/>
-      <Route path='/MonPokedex' element={<MonPokedex/>}/>
-    </Routes>
-    </>
+    return (
+        <>
+        <Navigation /> {/* Insertion de la banner et du menu de navigation. */} 
+        {/* Définition de la table de routage. */}
+        <Routes>
+            <Route path='/' element={<MesPokemons/>}/>              {/* route / : lancement du render MesPokemons. */}
+            <Route path='/MonPokedex' element={<MonPokedex/>}/>     {/* route /MonPokedex : lancement du render MonPokedex. */}
+        </Routes>
+        </>
   );
 }
 
