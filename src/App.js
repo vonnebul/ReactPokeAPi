@@ -4,6 +4,7 @@ import MesPokemons from './Components/MesPokemons';
 import MonPokedex from './Components/MonPokedex';
 import Navigation from './Components/Navigation';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './style/app.css';
 
 // Définition de l'objet App.
 // Celui-ci gère la génération du rendu de notre app.
