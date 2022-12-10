@@ -1,5 +1,25 @@
+.card > img.card-img-top {
+    width:100%;
+}
+
+.card-text > span {
+    padding: 2px 6px;
+    font-size:initial;
+    text-transform:uppercase;
+    border:1px solid #666666;
+    border-radius:4px;
+}
+
+.card-text > form > button {
+    margin:auto;
+    padding:6px 14px;
+    font-size:initial;
+    text-transform:uppercase;
+    border-radius:4px;
+}
+
 .grass{
-    background-color: green;
+    background-color: #008800;
     color: white;
     border: 3px solid black;
     border-radius: 10%;
@@ -7,8 +27,9 @@
     margin: 2px;
     padding: 3px;
 }
+
 .poison{
-   background-color:  rgba(131, 3, 131, 0.556);
+   background-color: #009999;
    color: white;
    border: 3px solid black;
    border-radius: 10%;
@@ -17,7 +38,7 @@
    padding: 3px;
 }
 .water{
-    background-color: blue;
+    background-color: #4444CC;
     color: white;
     border: 3px solid black;
     border-radius: 10%;
@@ -35,7 +56,7 @@
     padding: 3px;
 }
 .fire{
-    background-color: red;
+    background-color: #BB2222;
     color: white;
     border: 3px solid black;
     border-radius: 10%;

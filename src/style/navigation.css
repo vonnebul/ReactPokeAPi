@@ -1,12 +1,20 @@
+.navbar {
+    position:fixed !important;
+    top:0;
+    left:0;
+    right:0;
+    z-index:99;
+}
+
 .red{
     background-color: rgb(203, 66, 66);
 }
 .white{
     color: white;
-    font-size: 30px;
+    font-size: x-large;
     margin: 15px;
+    transition: transform 2s;
 }
-.white:hover{
-    text-decoration: underline;
-    transform: scale(1.2,1.2);
+.white:hover {
+    transform: scale(1.1,1.1);
 }

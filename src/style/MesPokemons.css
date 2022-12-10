@@ -1,3 +1,16 @@
+#root > .container {
+    margin-top:160px !important;
+    margin-bottom:100px;
+    padding:0;
+    z-index:1;
+}
+
+h2.loading {
+    margin:80px 0;
+    font-size:x-large;
+    text-align:center;
+}
+
 .espacement{
     margin: auto;
     padding: 30px;
@@ -11,9 +24,28 @@
     margin-top: 20px;
     width: 100%;
     height: 50px;
+    color: white;
     background-color: rgb(203, 66, 66);
     border-radius: 3%;
     border-color:rgb(203, 66, 66);
-    ;
+}
+button.long {
+    text-transform:uppercase;
+}
 
+div.prev-next-btn {
+    margin:0 0 20px 0;
+    position:fixed;
+    bottom:0;
+    width:inherit;
+    max-width:inherit;
+}
+div.prev-next-btn > div {
+    margin:auto;
+    padding:0;
+    width:48%;
+    vertical-align:middle;
+}
+div.prev-next-btn > div > button{
+    margin:0;
 }
