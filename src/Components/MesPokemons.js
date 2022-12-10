@@ -2,6 +2,11 @@ import React from "react";
 import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
+import TypePokemon from "./TypePokemon";
+import Card from 'react-bootstrap/Card';
+import "../style/MesPokemons.css"
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
 const MesPokemons=()=>{
     /* 
@@ -15,6 +20,7 @@ const MesPokemons=()=>{
     const [Chargement,setChargement]=useState(true);
     const [url,setUrl]=useState("https://pokeapi.co/api/v2/pokemon/")
     const [nextUrl,setNextUrl]=useState();
+    const [previousUrl, setPreviousUrl]= useState()
 
     // on lance la fonction getAllPokemon qui se relancera à chaque fois que l'url changera 
     useEffect(()=>{
@@ -29,6 +35,8 @@ const MesPokemons=()=>{
     const getAllPokemon=async()=>{
         setChargement(true)
         const res=await axios.get(url);
+        console.log(res)
+        setPreviousUrl(res.data.previous)
         setNextUrl(res.data.next);
         getPokemon(res.data.results)
         setChargement(false)
@@ -57,25 +65,69 @@ const MesPokemons=()=>{
         de mettre dans un composant enfant, les informations des pokémons, qui auraient pu être
         réutilisé plus tard.
     */
+
+    const ajout = async(e)=>{
+            e.preventDefault()
+            let res = await axios.get("https://pokeapi.co/api/v2/pokemon/"+e.target[0].value)
+            if(localStorage.getItem('MonPokedex')==null){
+                localStorage.setItem('MonPokedex', JSON.stringify([]))
+            }
+            let test = JSON.parse(localStorage.getItem('MonPokedex'))
+            test.push(res.data)
+            localStorage.setItem('MonPokedex', JSON.stringify(test))
+    }
     return (
         <>
         {
             Chargement ? <h1>Chargement</h1> :
-            pokeData.map((item) => {
-                    return (
-                            <div key={item.id} style={{border: "1px solid black", marginLeft: "40%", marginRight: "40%"}}>
-                                <p>numéro pokedex: {item.id}</p>
-                                <img src={item.sprites.front_default} alt="" />
-                                <p>{item.name}</p>
+            <div className="container espacement">
+                <div className="row">
+
+
+            {pokeData.map((item) => {
+                    return (     
+                        <div className="col-3">                 
+                            <div key={item.id}>
+                                <Card className="decalage">
+                                    <Card.Img variant="top" src={item.sprites.front_default} />
+                                    <Card.Body>
+                                        <Card.Title>{item.name}</Card.Title>
+                                        <Card.Text>
+                                        <p>n°{item.id}</p>
+                                        <TypePokemon types={item.types}/>
+                                        <Form className="espacement" onSubmit={ajout}>
+                                            <Button variant="outline-primary" type="submit" value={item.id}>
+                                                Ajouter au pokédex
+                                            </Button>
+                                        </Form>
+                                        </Card.Text>
+                                    </Card.Body>
+                                    
+                                    
+                                </Card>
+                                </div> 
                             </div>
                     )
-                })
+                })}
+                </div>
+                <div className="row">
+                <div className="col-6">
+                { previousUrl && <button className="long" onClick={()=>{
+                            setPokeData([]) 
+                            setUrl(previousUrl)
+                        }}>Précédent</button>}
+                        </div>
+                    <div className="col-6">
+                { nextUrl && <button className="long" onClick={()=>{
+                            setPokeData([]) 
+                            setUrl(nextUrl)
+                        }}>Suivant</button>}
+                        </div>
+                </div>
+            </div>
         }
         <div>
-                        { nextUrl && <button onClick={()=>{
-                            setPokeData([])
-                            setUrl(nextUrl)
-                        }}>Next</button>}
+                       
 
                     </div>
         </>
