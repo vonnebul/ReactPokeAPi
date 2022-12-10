@@ -2,11 +2,11 @@ import React from "react";
 import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
-import TypePokemon from "./TypePokemon";
-import Card from 'react-bootstrap/Card';
-import "../style/MesPokemons.css"
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import Card from 'react-bootstrap/Card';
+import TypePokemon from "./TypePokemon";
+import "../style/MesPokemons.css"
 
 // Définition du render MesPokemons.
 // Celui-ci gère la liste des Pokémons disponibles.
@@ -18,11 +18,11 @@ const MesPokemons = () => {
     La troisième est pour l'url du site
     La dernière est pour afficher l'url des 20 prochains pokémons
     */
-    const [pokeData,setPokeData]=useState([]);
-    const [Chargement,setChargement]=useState(true);
-    const [url,setUrl]=useState("https://pokeapi.co/api/v2/pokemon/")
-    const [nextUrl,setNextUrl]=useState();
-    const [previousUrl, setPreviousUrl]= useState()
+    const [pokeData, setPokeData] = useState([]);
+    const [Chargement, setChargement] = useState(true);
+    const [url, setUrl] = useState("https://pokeapi.co/api/v2/pokemon/");
+    const [nextUrl, setNextUrl] = useState();
+    const [previousUrl, setPreviousUrl] = useState();
 
     // on lance la fonction getAllPokemon qui se relancera à chaque fois que l'url changera 
     useEffect(()=>{
@@ -34,15 +34,15 @@ const MesPokemons = () => {
     ET data.next qui donnera les autres pokémons
     Bien sur vu que l'on récupère les données le chargement passera de true à false
     */
-    const getAllPokemon=async()=>{
-        setChargement(true)
-        const res=await axios.get(url);
-        console.log(res)
-        setPreviousUrl(res.data.previous)
+    const getAllPokemon = async () => {
+        setChargement(true);
+        const res = await axios.get(url);
+        //console.log(res);
+        setPreviousUrl(res.data.previous);
         setNextUrl(res.data.next);
-        getPokemon(res.data.results)
-        setChargement(false)
-    }
+        getPokemon(res.data.results);
+        setChargement(false);
+    };
 
     /*
         GetPokemon va permettre de récupérer les infos d'un seul pokémon
@@ -51,16 +51,16 @@ const MesPokemons = () => {
         ensuite on garde les données des pokémon dans notre setPokeData en prenant bien soin de pas supprimer
         les anciens states. Et ensuite on ordonne (non obligatoire) pour les affichers dans l'ordre
     */
-    const getPokemon=async(res)=>{
-       res.map(async(item)=>{
-          const result=await axios.get(item.url)
-          setPokeData(state=>{
-              state=[...state,result.data]
-              state.sort((a,b)=>a.id>b.id?1:-1)
+    const getPokemon = async res => {
+       res.map(async item => {
+          const result = await axios.get(item.url);
+          setPokeData(state => {
+              state = [...state,result.data];
+              state.sort((a, b) => a.id > b.id ?1 :-1);
               return state;
-          })
-       })   
-    }
+          });
+       });
+    };
 
     /* 
         tips:ici tout a été mis dans une seule page, mais il aurait été plus optimisé
@@ -68,16 +68,18 @@ const MesPokemons = () => {
         réutilisé plus tard.
     */
 
-    const ajout = async(e)=>{
-            e.preventDefault()
-            let res = await axios.get("https://pokeapi.co/api/v2/pokemon/"+e.target[0].value)
-            if(localStorage.getItem('MonPokedex')==null){
+    const ajout = async e => {
+            e.preventDefault();
+
+            let res = await axios.get("https://pokeapi.co/api/v2/pokemon/"  +e.target[0].value);
+            if (localStorage.getItem('MonPokedex') === null) {
                 localStorage.setItem('MonPokedex', JSON.stringify([]))
             }
-            let test = JSON.parse(localStorage.getItem('MonPokedex'))
-            test.push(res.data)
-            localStorage.setItem('MonPokedex', JSON.stringify(test))
-    }
+
+            let test = JSON.parse(localStorage.getItem('MonPokedex'));
+            test.push(res.data);
+            localStorage.setItem('MonPokedex', JSON.stringify(test));
+    };
 
     return (
         <>
@@ -111,13 +113,13 @@ const MesPokemons = () => {
                     <div className="row prev-next-btn">
                         <div className="col-6">
                             {previousUrl && <button className="long" onClick={()=>{
-                                    setPokeData([]) 
+                                    setPokeData([])
                                     setUrl(previousUrl)
                             }}>Précédent</button>}
                         </div>
                         <div className="col-6">
                             { nextUrl && <button className="long" onClick={()=>{
-                                    setPokeData([]) 
+                                    setPokeData([])
                                     setUrl(nextUrl)
                             }}>Suivant</button>}
                         </div>
