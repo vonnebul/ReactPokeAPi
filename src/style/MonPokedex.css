@@ -2,3 +2,18 @@
     text-align: center;
     margin:auto
 }
+
+h2.emptypoke {
+    margin:20px 0;
+    font-size:x-large;
+    text-align:center;
+}
+
+button.search {
+    background-color:#EEFFEE;
+}
+
+button.wipepokedex {
+    background-color:#FFEEEE;
+}
+

@@ -1,3 +1,10 @@
+.card {
+    margin:12px 0 !important;
+    box-shadow:0 0 6px #DDDDDD;
+    border:1px solid #AAAAAA !important;
+    border-radius:8px !important;
+}
+
 .card > img.card-img-top {
     width:100%;
 }
